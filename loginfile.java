@@ -91,7 +91,7 @@ public class login extends JFrame {
 						JOptionPane.showMessageDialog(null, "Incorrect username or password!");
 					}
 					con.close();
-					
+					dispose();
 				}catch(Exception e) {
 					JOptionPane.showMessageDialog(null, "Invalid Input!check again!");
 				}
