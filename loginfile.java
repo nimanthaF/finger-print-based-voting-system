@@ -1,7 +1,3 @@
-//name of the databasse :jeff (this is only a temporary database for working)
-//mysql databse username : "root"
-//password:"0313313510"
-
 package mysqllogin;
 
 import java.sql.*;
@@ -82,7 +78,7 @@ public class login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/jeff","root","0313313510");      
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/jeff","root","0313313510");
 					Statement stmt=con.createStatement();
 					String sql="Select * from dblogin where username='"+textField.getText()+"'and password_log='"+passwordField.getText().toString()+"'";
 					ResultSet rs=stmt.executeQuery(sql);
