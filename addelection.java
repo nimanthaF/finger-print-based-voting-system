@@ -1,5 +1,7 @@
 package dataentry;
 
+import java.sql.*;
+import java.lang.*;
 import java.awt.EventQueue;
 
 import javax.swing.JDesktopPane;
@@ -7,9 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class addelection extends JFrame {
 
@@ -84,6 +90,7 @@ public class addelection extends JFrame {
 		textField_2.setBounds(274, 275, 245, 31);
 		desktopPane.add(textField_2);
 		textField_2.setColumns(10);
+		int text2=Integer.parseInt(textField_2.getText());
 		
 		JLabel lblNewLabel_3 = new JLabel("Start date");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -94,6 +101,7 @@ public class addelection extends JFrame {
 		textField_3.setBounds(274, 353, 245, 27);
 		desktopPane.add(textField_3);
 		textField_3.setColumns(10);
+		int text3=Integer.parseInt(textField_3.getText());
 		
 		JLabel lblNewLabel_4 = new JLabel("End Date");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -104,8 +112,27 @@ public class addelection extends JFrame {
 		textField_4.setBounds(274, 411, 245, 32);
 		desktopPane.add(textField_4);
 		textField_4.setColumns(10);
+		int text4=Integer.parseInt(textField_4.getText());
 		
 		JButton btnNewButton = new JButton("submit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/jeff","root","0313313510");
+					PreparedStatement statement = conn.prepareStatement("INSERT INTO  addelection(election_id,election,no_of_candidates,start_date,end_date) VALUES (?,?,?,?,?)");
+					statement.setString(1,textField.getText());
+					statement.setString(2,textField_1.getText());
+					statement.setInt(3, text2);
+					statement.setInt(4, text3);
+					statement.setInt(5, text4);
+					statement.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Inserted succesfully!");
+				}catch(Exception e) {
+					System.out.println("Invalid input!");
+				}
+			}
+		});
 		btnNewButton.setBackground(new Color(127, 255, 212));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 22));
 		btnNewButton.setBounds(211, 488, 166, 38);
